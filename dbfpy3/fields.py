@@ -126,7 +126,7 @@ class DbfFieldDef(object):
         """
         assert len(string) == 32
         _length = string[16]
-        return cls(utils.unzfill(string)[:11].decode(DEFAULT_ENCODING), _length,
+        return cls(utils.unzfill(string)[:11].decode(DEFAULT_ENCODING, 'ignore'), _length,
                    string[17], start, start + _length, ignoreErrors=ignoreErrors)
 
     fromString = classmethod(fromString)
@@ -214,7 +214,7 @@ class DbfCharacterFieldDef(DbfFieldDef):
         Return value is a ``value`` argument with stripped right spaces.
 
         """
-        return value.rstrip(b' ').decode(DEFAULT_ENCODING)
+        return value.rstrip(b' ').decode(DEFAULT_ENCODING, 'ignore')
 
     def encodeValue(self, value):
         """Return raw data string encoded from a ``value``."""
